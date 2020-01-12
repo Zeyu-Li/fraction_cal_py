@@ -232,8 +232,8 @@ def main():
     second_input = input("Second Fraction: ")
 
     # unpack the strings
-    first_input, operator, second_input = strip_mult(first_input, operator, second_input)
-    message, first_input, second_input = parse(first_input, second_input)
+    input1, operator, input2 = strip_mult(first_input, operator, second_input)
+    message, first_input, second_input = parse(input1, input2)
 
     # if parsing did not worked, print error and break
     if not message:
@@ -246,15 +246,15 @@ def main():
     # switch statement to check operator
     try:
         if operator == "+":
-            print(f"{first_input} + {second_input} = {first_input + second_input}")
+            print(f"{input1} + {input2} = {first_input + second_input}")
         elif operator == "-":
-            print(f"{first_input} - {second_input} = {first_input - second_input}")
+            print(f"{input1} - {input2} = {first_input - second_input}")
         elif operator == "*" or operator == "x":
-            print(f"{first_input} * ({second_input}) = {first_input * second_input}")
+            print(f"{input1} * ({input2}) = {first_input * second_input}")
         elif operator == "/":
-            print(f"{first_input} / ({second_input}) = {first_input / second_input}")
+            print(f"{input1} / ({input2}) = {first_input / second_input}")
         elif operator == "**":
-            print(f"{first_input} ^ ({second_input}) = {first_input ** second_input}")
+            print(f"{input1} ^ ({input2}) = {first_input ** second_input}")
     except:
         print("Your input was not recognized, please try again")
 
