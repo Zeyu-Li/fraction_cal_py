@@ -86,6 +86,14 @@ class Fraction:
 
         return Fraction(self.bottom * lhs.top, self.top * lhs.bottom)
 
+    def __pow__(self, rhs):
+        """ overloads ** """
+        return self.to_float() ** rhs
+
+    def __rpow__(self, rhs):
+        """ overloads ** but backwards """
+        return self.__pow__(rhs)
+
     def simplify(self):
         """ simplifies the fraction """
         gcd = self.gcd(self.top, self.bottom)
@@ -157,13 +165,9 @@ def main():
 
     # print instrustion and get input 
     print("Fraction Calculator 1.0. Input a int, decimal, or fraction and the operator")
-    # first_input = input("First Fraction: ")
-    # operator = input("Operator (+, - , *, /): ")
-    # second_input = input("Second Fraction: ")
-    
-    first_input = "2"
-    operator = "/"
-    second_input = "32/7"
+    first_input = input("First Fraction: ")
+    operator = input("Operator (+, - , *, /): ")
+    second_input = input("Second Fraction: ")
 
     # unpack the strings
     first_input, operator, second_input = strip_mult(first_input, operator, second_input)
