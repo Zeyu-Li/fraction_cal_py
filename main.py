@@ -166,7 +166,7 @@ def main():
     # print instrustion and get input 
     print("Fraction Calculator 1.0. Input a int, decimal, or fraction and the operator")
     first_input = input("First Fraction: ")
-    operator = input("Operator (+, - , *, /): ")
+    operator = input("Operator (+, - , *, /, or **): ")
     second_input = input("Second Fraction: ")
 
     # unpack the strings
@@ -191,6 +191,8 @@ def main():
             print(f"{first_input} * ({second_input}) = {first_input * second_input}")
         elif operator == "/":
             print(f"{first_input} / ({second_input}) = {first_input / second_input}")
+        elif operator == "**":
+            print(f"{first_input} ^ ({second_input}) = {first_input ** second_input}")
     except:
         print("Your input was not recognized, please try again")
 
