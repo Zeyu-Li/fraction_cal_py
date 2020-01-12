@@ -10,6 +10,7 @@ class Fraction:
         self.top = top
         self.bottom = bottom
 
+    # overloads
     def __str__(self):
         """ prints fraction """
         self.simplify()
@@ -29,9 +30,9 @@ class Fraction:
 
         return Fraction(self.top + rhs.top, self.bottom)
 
-    def __radd__(self, other):
+    def __radd__(self, lhs):
         """ overloads + but backwards b/c of commutativity """
-        return self.__add__(other)
+        return self.__add__(lhs)
 
     def __sub__(self, rhs):
         """ overloads - """
@@ -64,9 +65,9 @@ class Fraction:
 
         return Fraction(self.top * rhs.top, self.bottom * rhs.bottom)
 
-    def __rmul__(self, rhs):
+    def __rmul__(self, lhs):
         """ overloads * but backwards """
-        return self.__mul__(rhs)
+        return self.__mul__(lhs)
 
     def __truediv__(self, rhs):
         """ overloads / """
@@ -90,10 +91,68 @@ class Fraction:
         """ overloads ** """
         return self.to_float() ** rhs
 
-    def __rpow__(self, rhs):
+    def __rpow__(self, lhs):
         """ overloads ** but backwards """
-        return self.__pow__(rhs)
+        return self.__pow__(lhs)
 
+    # comparisons
+    def __lt__(self, other):
+        if isinstance(other, Fraction):
+            return self.to_float() < other.to_float()
+        return self.to_float() < other
+
+    def __rlt__(self, lhs):
+        if isinstance(lhs, Fraction):
+            return self.to_float() > lhs.to_float()
+        return self.to_float() > lhs
+
+    def __le__(self, other):
+        if isinstance(other, Fraction):
+            return self.to_float() <= other.to_float()
+        return self.to_float() <= other
+
+    def __rle__(self, lhs):
+        if isinstance(lhs, Fraction):
+            return self.to_float() >= lhs.to_float()
+        return self.to_float() >= lhs
+
+    def __gt__(self, other):
+        if isinstance(other, Fraction):
+            return self.to_float() > other.to_float()
+        return self.to_float() > other
+
+    def __rgt__(self, lhs):
+        if isinstance(lhs, Fraction):
+            return self.to_float() < lhs.to_float()
+        return self.to_float() < lhs
+
+    def __ge__(self, other):
+        if isinstance(other, Fraction):
+            return self.to_float() >= other.to_float()
+        return self.to_float() >= other
+
+    def __rge__(self, lhs):
+        if isinstance(lhs, Fraction):
+            return self.to_float() <= lhs.to_float()
+        return self.to_float() <= lhs
+
+    def __eq__(self, other):
+        if isinstance(other, Fraction):
+            return self.to_float() == other.to_float()
+        return self.to_float() == other
+
+    def __req__(self, lhs):
+        return self.__eq__(lhs)
+
+    def __ne__(self, other):
+        if isinstance(other, Fraction):
+            return self.to_float() != other.to_float()
+        return self.to_float() != other
+
+    def __rne__(self, lhs):
+        return self.__ne__(lhs)
+
+    # end of overloads
     def simplify(self):
         """ simplifies the fraction """
         gcd = self.gcd(self.top, self.bottom)
@@ -120,10 +179,12 @@ class Fraction:
             fraction.bottom = lcm
 
     def to_float(self):
+        """ converts fraction to decimal """
         return self.top/self.bottom
 
 
 def strip_mult(*args):
+    """ converts a variable amount of args to be striped of whitespace """
     temp = []
     for element in args:
         temp.append(element.strip())
@@ -132,6 +193,7 @@ def strip_mult(*args):
 
 
 def parse(*args):
+    """ parses through a set of strings and returns the right type """
 
     message = 0
     inputs = []
@@ -163,7 +225,7 @@ def parse(*args):
 def main():
     # main function
 
-    # print instrustion and get input 
+    # print instrustion and get input
     print("Fraction Calculator 1.0. Input a int, decimal, or fraction and the operator")
     first_input = input("First Fraction: ")
     operator = input("Operator (+, - , *, /, or **): ")
